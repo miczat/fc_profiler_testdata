@@ -18,7 +18,7 @@ Returned values
     What is returned by the program, if anything.
 
 Issues and known limitations:
-    Writen for Python 3.11.11 as shipped with ArcGIS Pro 3.5.3
+    Writen for Python 3.13.7 as shipped with ArcGIS Pro 3.6.0
 
 Dev Notes:
     Remote origin: https://github.com/miczat/python-script-template
@@ -39,7 +39,6 @@ LAST_UPDATED = "2025-12-30"
 
 import arcpy  # pyright: ignore[reportMissingImports]
 from arcpy import env # pyright: ignore[reportMissingImports]
-from arcpy.sa import * # pyright: ignore[reportMissingImports]
 import logging
 import os
 import datetime
@@ -65,9 +64,7 @@ log_folder = r"."
 # other config
 
 # set the geoprocessing environment
-arcpy.env.workspace = r'C:\Users\Mic\OneDrive\code\py_arcpy\fc_profiler_testdata' 
-arcpy.env.overwriteOutput = True   # avoids having to test for existence and delete
-arcpy.env.addOutputsToMap = False
+
 
 
 # -----------------------------------------

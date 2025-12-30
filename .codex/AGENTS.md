@@ -11,9 +11,10 @@ If instructions in this file conflict with ad-hoc user prompts, **this file take
 
 ## Project Overview
 
-**Project name:** fc_profiler_testdata.py  
-**Primary language(s):** 3.13.7 
-**Primary domain:** GIS / data engineering
+**Project name:** Feature Class Profiler – test data generator (fc_profiler_create_testdata.py)
+**Primary domain:** GIS / data audit
+**Primary language:** Python
+**Target runtime:** Python 3.13.7 (ArcGIS Pro 3.6)
 
 **High-level goals:**
 - Script creation of geodatabase(s), feature class, fields, rows
@@ -28,11 +29,12 @@ If instructions in this file conflict with ad-hoc user prompts, **this file take
 - Avoid unnecessary abstraction
 - Favor small, composable functions
 - Write for ease of reading and maintainability
+- Keep the solution to a single file
+- If requirements.md specifies hardcoded paths/env, implement exactly; do not generalize to CLI args.
 
 ### Python Standards (if applicable)
 - Follow **PEP 8**
 - Use **type hints** for public functions
-- Prefer `pathlib` over `os.path`
 - Prefer f-strings over `.format()`
 - No global state unless explicitly justified
 
@@ -47,22 +49,39 @@ If instructions in this file conflict with ad-hoc user prompts, **this file take
 - Third-party libraries second
 - If importing arcpy, use a library in arcpy where a suitable library exists
 - Local imports last
-- Avoid wildcard imports
+- Avoid wildcard imports except when importing ArcPy extension toolboxes where that is established project practice (e.g., arcpy.sa). Otherwise prefer explicit imports
+- Remove unused imports; keep only what is required
+
+
+### ArcGIS Pro / ArcPy constraints
+ - Codex cannot execute ArcPy here; still write ArcPy code as required; include local run instructions and validations
+ - Assume ArcGIS Pro is installed; script runs inside the ArcGIS Pro conda env; no third-party deps.
+ - Target: Python environment is 3.13.7
+ - Use arcpy.management.* tools and arcpy.da.InsertCursor 
+ - Use SHAPE@ for geometry and wrap cursors in with blocks
+ - Prefer arcpy.SpatialReference(<epsg>) over WKT strings
+ - use arcpy.Describe(fc).spatialReference.factoryCode == <epsg> when comparing coordinate systems
+ - Prefer arcpy.PointGeometry, arcpy.Array, arcpy.Polyline, arcpy.Polygon patterns for geometry creation
+ - Prefer arcpy.ClearWorkspaceCache_management() before delete attempts (when applicable), and log potential lock sources.
+
 
 ---
 
 ## Logging & Error Handling
 
-- Use the project’s standard logging configuration
-- Do not use `print()` for operational logging
+- Use the project’s standard logging configuration. Do not modify setup_logger() / CSV format unless explicitly requested.
+- Do not use `print()` for operational logging.  print() is acceptable only as a fallback inside logger setup failure paths (when logging is not yet available).
 - Raise meaningful exceptions
 - Fail fast on invalid inputs
 
 ---
+## Validation
 
+Every validation failure must (1) log error with expected vs actual, then (2) raise.
+
+---
 ## Dependency Management
 
-- Do not introduce new dependencies without justification
 - Do not introduce new dependencies without justification
 - Prefer existing libraries already in use
 - Document any new dependency in:

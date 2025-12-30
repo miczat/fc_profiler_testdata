@@ -1,40 +1,35 @@
 """ 
-Creates test data for feature class profiler.
+Creates test data for Feature Class Profiler.
 
 
 Args:
-    parameter: description
-    parameter: description
+    gdb_location: Folder where the file geodatabase will be created.
+    gdb_name: Name of the file geodatabase to create.
+
 
 Preconditions:
-    Statements that must be true before running the program.
+    Parameters are valid paths and names.
 
 
 Postconditions
-    Statements that will be true after running the program.
+    A file geodatabase is created with feature classes and test data.
 
 
 Returned values
-    What is returned by the program, if anything.
+    Nothing
 
 Issues and known limitations:
     Writen for Python 3.13.7 as shipped with ArcGIS Pro 3.6.0
+    The script assumes ArcGIS Pro is installed and the arcpy module is available.
+
 
 Dev Notes:
-    Remote origin: https://github.com/miczat/python-script-template
-
-    Terminology, with pathlib name:
-       image_path   =  C:\TEMP\A.JPG     # full path 'p'
-       image_folderpath =  C:\TEMP       # p.parent
-       image_foldername =  TEMP          # p.parent.name
-       image_filename   =  A.JPG         # p.name
-       image_name       =  A             # p.stem
-       image_extension  =  JPG           # p.suffix   
+    Remote origin: https://github.com/miczat/fc_profiler_testdata
      
 """
 __author__ = "Mic Zatorsky"
-__version__ = '2.0'
-LAST_UPDATED = "2025-12-30"
+__version__ = '1.0'
+LAST_UPDATED = "2025-12-31"
 
 
 import arcpy  # pyright: ignore[reportMissingImports]
@@ -46,8 +41,6 @@ import sys
 import traceback
 from pathlib import Path    
 import shutil
-
-
 
 log = logging.getLogger(__name__)
 
@@ -68,9 +61,6 @@ gdb_name = "fc_profiler_testdata.gdb"
 env.overwriteOutput = True
 env.addOutputsToMap = False
 env.workspace = gdb_location
-
-# set the geoprocessing environment
-
 
 
 # -----------------------------------------
@@ -152,7 +142,7 @@ def setup_logger(log_folder: str) -> None:
 
 
 # -----------------------------------------
-# get row count
+# Fucntions
 # -----------------------------------------
 def get_row_count(table_or_layer) -> int:
     """Return the number of rows in a table or feature layer.
@@ -419,7 +409,7 @@ def validate_all(gdb_path: Path) -> None:
             "fc_pl": "Polyline",
             "fc_pg": "Polygon",
             "fc_mpt": "Multipoint",
-            "fc_mp": "Multipatch",
+            "fc_mp": "MultiPatch",
         },
     )
 

@@ -44,6 +44,49 @@ If instructions in this file conflict with ad-hoc user prompts, **this file take
 - Constants in `UPPER_SNAKE_CASE`
 - Avoid ambiguous abbreviations unless domain-standard
 
+### File and folder naming conventions
+
+This project uses **explicit, `pathlib`-aligned variable naming** for files and directories.
+The goal is clarity, consistency, and one-to-one mapping between variable names and
+`pathlib.Path` attributes.
+
+#### General rules
+
+- Use `path` for full paths (`pathlib.Path` objects)
+- Use `folderpath` for directory paths
+- Use `foldername` for directory names only (no path)
+- Use `filename` for file name including extension
+- Use `name` for file name without extension
+- Use `extension` for file extension (including the leading dot, unless explicitly stated)
+
+Avoid ambiguous terms such as `dir`, `file`, `fname`, `pathstr`, or overloaded names like `fp`.
+
+#### Standard `pathlib` mappings
+
+| Variable name        | Meaning                              | `pathlib` equivalent |
+|----------------------|--------------------------------------|----------------------|
+| `file_path`          | Full path to a file                  | `p`                  |
+| `folder_path`        | Full path to parent directory        | `p.parent`           |
+| `folder_name`        | Directory name only                  | `p.parent.name`      |
+| `file_name`          | File name with extension             | `p.name`             |
+| `file_stem`          | File name without extension          | `p.stem`             |
+| `file_extension`     | File extension (with leading dot)    | `p.suffix`           |
+
+#### Example
+
+```python
+from pathlib import Path
+
+file_path = Path(r"C:\TEMP\A.JPG")
+
+folder_path   = file_path.parent  # C:\TEMP
+folder_name   = folder_path.name  # TEMP
+file_name     = file_path.name    # A.JPG
+file_stem     = file_path.stem    # A
+file_extension = file_path.suffix # .JPG
+```
+
+
 ### Imports
 - Standard library first
 - Third-party libraries second

@@ -1,0 +1,7 @@
+timestamp,level,filename,funcName,message
+2025-12-30 10:11:14,INFO,fc_profiler_create_testdata.py,main,"Start"
+2025-12-30 10:11:14,INFO,fc_profiler_create_testdata.py,main,"Script version 2.0, by Mic Zatorsky last updated 2025-12-30"
+2025-12-30 10:11:14,INFO,fc_profiler_create_testdata.py,main,"Using Python version 3.13.7 | packaged by Anaconda, Inc. | (main, Sep 11 2025, 16:13:29) [MSC v.1938 64 bit (AMD64)]"
+2025-12-30 10:11:14,INFO,fc_profiler_create_testdata.py,main,"Trying..."
+2025-12-30 10:11:14,INFO,fc_profiler_create_testdata.py,main,"Finished"
+2025-12-30 10:11:14,INFO,fc_profiler_create_testdata.py,main,"Duration          0:00:00.000574"

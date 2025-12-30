@@ -1,0 +1,10 @@
+<type>: <short summary (≤ 50 chars)>
+Why:
+- What problem does this change address?
+What:
+- What was changed at a high level?
+Notes:
+- Side effects, assumptions, or follow-ups
+# Types: feat, fix, refactor, chore, docs, test
+# Keep subject in imperative mood ("Add", not "Added")
+# Wrap body at ~72 chars
